@@ -27,6 +27,8 @@ Para implementar os algoritmos de hash SHA-256 e de criptografia AES-256 em Pyth
 
 #### Cenários para SHA-256 (Utilizando a biblioteca `hashlib`)
 
+##### [Link do notebook para SHA-256 ](https://colab.research.google.com/drive/1_BH0Wah_RtehOqif_4v6dGgV-aRJuVMW?usp=sharing)
+
 #### Teste 1 – Hash de String Simples
 - **Objetivo:**  
   Verificar o hash de uma string curta.
@@ -69,7 +71,9 @@ Para implementar os algoritmos de hash SHA-256 e de criptografia AES-256 em Pyth
 
 ---
 
-### Cenários para AES-256 (Utilizando a biblioteca `pycryptodome`)
+#### Cenários para AES-256 (Utilizando a biblioteca `pycryptodome`)
+
+##### [Link do notebook para AES-256 ](https://colab.research.google.com/drive/1jpS7r8NvpBnSjkD56Yx55QvcOTWbBt8k?usp=sharing)
 
 #### Teste 6 – Encriptação em Modo ECB com String Simples
 - **Objetivo:**  
@@ -111,4 +115,20 @@ Para implementar os algoritmos de hash SHA-256 e de criptografia AES-256 em Pyth
 - **Saída Esperada:**  
   Média do tempo de execução por iteração e confirmação de que o texto original é recuperado.
  
+## Conclusão Comparativa entre SHA-256 e AES-256
 
+O SHA-256 é um algoritmo de hash criptográfico unidirecional, utilizado principalmente para garantir a integridade e autenticidade de dados. Já o AES-256 é um algoritmo de criptografia simétrica, projetado para proteger informações confidenciais, permitindo tanto a encriptação quanto a recuperação dos dados originais mediante uma chave secreta.
+
+Nos testes realizados, o SHA-256 demonstrou ser altamente eficaz na verificação de integridade. No teste 4 (idempotência do hash), verificamos que a mesma entrada sempre gerou o mesmo hash, confirmando sua deterministicidade. Além disso, no teste 2 (hash de texto longo), pequenas mudanças na entrada resultaram em hashes completamente distintos, validando o efeito avalanche, um princípio para garantir que nenhuma informação da entrada possa ser inferida a partir do hash gerado.
+
+Outro aspecto importante do SHA-256, observado no teste 5 (hash de conteúdo de arquivo simulado), é sua capacidade de gerar resumos criptográficos únicos para qualquer tipo de dado, incluindo arquivos inteiros. Isso o torna uma escolha ideal para aplicações que exigem verificação de integridade, como autenticação de documentos e armazenamento seguro de senhas. Entretanto, por ser um algoritmo unidirecional, os dados originais nunca podem ser recuperados a partir do hash, limitando seu uso a situações em que a reversibilidade não é necessária.
+
+O AES-256, por sua vez, mostrou-se eficiente para a proteção de informações sensíveis, garantindo que apenas usuários autorizados, com a chave correta, possam acessar os dados criptografados. Durante os testes, foi possível observar que diferentes modos de operação afetam a segurança do processo. No teste 6 (encriptação em modo ECB), identificamos que esse modo não introduz variação entre blocos idênticos, o que pode comprometer a segurança em certos cenários. Já no teste 7 (encriptação em modo CBC), o uso de um vetor de inicialização adicionou aleatoriedade à saída, tornando os dados cifrados mais seguros contra padrões previsíveis.
+
+Além disso, o teste 8 (ciclo de encriptação e decriptação) confirmou que o AES-256 permite recuperar integralmente as informações criptografadas, algo impossível no SHA-256. Isso torna o AES-256 uma solução ideal para o armazenamento seguro de dados sigilosos e para a comunicação protegida entre sistemas. No entanto, sua segurança depende diretamente da proteção da chave de criptografia. Se a chave for comprometida, qualquer pessoa poderá descriptografar as informações.
+
+### Diferenças Principais e Aplicações
+
+SHA-256 é um algoritmo eficiente para garantir que um dado permaneça autêntico e inalterado. Seu uso é recomendado para assinaturas digitais, autenticação e verificação de arquivos. Por outro lado, AES-256 é eficiente para a proteção de informações contra acessos não autorizados, garantindo que apenas quem possui a chave correta possa acessar o conteúdo.
+
+A escolha entre SHA-256 e AES-256 depende do objetivo final. Se a necessidade for garantir que um dado não foi modificado, o SHA-256 é a melhor opção. Se o foco for proteger informações sigilosas e garantir que possam ser recuperadas posteriormente, o AES-256 é a alternativa mais adequada.
